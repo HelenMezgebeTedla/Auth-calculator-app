@@ -3,100 +3,98 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2563eb" />
   <title>Quick Auth + Calculator</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
+  <main class="container">
     <header>
+      <div class="brand-mark" aria-hidden="true">AC</div>
       <h1>Quick Auth + Calculator</h1>
-      <p>Create an account, log in, and use a calculator.</p>
+      <p>Create an account, log in, and calculate securely in this demo.</p>
     </header>
 
-    <nav class="tabs">
-      <button class="tab active" data-target="signup">Sign Up</button>
-      <button class="tab" data-target="login">Log In</button>
-      <button class="tab" data-target="calculator">Calculator</button>
+    <nav class="tabs" aria-label="Main sections">
+      <button class="tab active" type="button" data-target="signup" aria-controls="signup">Sign Up</button>
+      <button class="tab" type="button" data-target="login" aria-controls="login">Log In</button>
+      <button class="tab" type="button" data-target="calculator" aria-controls="calculator">Calculator</button>
     </nav>
 
-    <section id="message" class="message hidden"></section>
+    <section id="message" class="message hidden" role="status" aria-live="polite"></section>
 
-    <section id="signup" class="panel active">
-      <h2>Sign Up</h2>
+    <section id="signup" class="panel active" aria-labelledby="signupTitle">
+      <h2 id="signupTitle">Create your account</h2>
       <form id="signupForm" class="card">
-        <label>
-          Full Name
-          <input type="text" id="signupName" placeholder="Jane Doe" required />
+        <label for="signupName">Full Name
+          <input type="text" id="signupName" name="name" placeholder="Jane Doe" autocomplete="name" minlength="2" required />
         </label>
 
-        <label>
-          Email
-          <input type="email" id="signupEmail" placeholder="jane@example.com" required />
+        <label for="signupEmail">Email
+          <input type="email" id="signupEmail" name="email" placeholder="jane@example.com" autocomplete="email" required />
         </label>
 
-        <label>
-          Password
-          <input type="password" id="signupPassword" placeholder="Minimum 6 characters" required />
+        <label for="signupPassword">Password
+          <input type="password" id="signupPassword" name="password" placeholder="Minimum 6 characters" autocomplete="new-password" minlength="6" required />
         </label>
 
         <button type="submit">Create Account</button>
       </form>
     </section>
 
-    <section id="login" class="panel">
-      <h2>Log In</h2>
+    <section id="login" class="panel" aria-labelledby="loginTitle">
+      <h2 id="loginTitle">Welcome back</h2>
       <form id="loginForm" class="card">
-        <label>
-          Email
-          <input type="email" id="loginEmail" placeholder="jane@example.com" required />
+        <label for="loginEmail">Email
+          <input type="email" id="loginEmail" name="email" placeholder="jane@example.com" autocomplete="email" required />
         </label>
 
-        <label>
-          Password
-          <input type="password" id="loginPassword" placeholder="Enter password" required />
+        <label for="loginPassword">Password
+          <input type="password" id="loginPassword" name="password" placeholder="Enter password" autocomplete="current-password" required />
         </label>
 
         <button type="submit">Log In</button>
       </form>
     </section>
 
-    <section id="calculator" class="panel">
-      <h2>Calculator</h2>
+    <section id="calculator" class="panel" aria-labelledby="calculatorTitle">
+      <h2 id="calculatorTitle">Calculator</h2>
       <div class="card">
         <div class="status-row">
-          <span id="loginStatus">Not logged in</span>
-          <button id="logoutBtn" class="secondary">Log Out</button>
+          <span id="loginStatus" class="status">Not logged in</span>
+          <button id="logoutBtn" class="secondary" type="button">Log Out</button>
         </div>
 
-        <label>
-          First Number
-          <input type="number" id="num1" placeholder="e.g. 24" />
-        </label>
+        <form id="calculatorForm">
+          <div class="number-grid">
+            <label for="num1">First Number
+              <input type="number" id="num1" placeholder="24" step="any" inputmode="decimal" />
+            </label>
 
-        <label>
-          Second Number
-          <input type="number" id="num2" placeholder="e.g. 6" />
-        </label>
+            <label for="num2">Second Number
+              <input type="number" id="num2" placeholder="6" step="any" inputmode="decimal" />
+            </label>
+          </div>
 
-        <label>
-          Operation
-          <select id="operation">
-            <option value="add">Add (+)</option>
-            <option value="subtract">Subtract (-)</option>
-            <option value="multiply">Multiply (×)</option>
-            <option value="divide">Divide (÷)</option>
-          </select>
-        </label>
+          <label for="operation">Operation
+            <select id="operation">
+              <option value="add">Add (+)</option>
+              <option value="subtract">Subtract (−)</option>
+              <option value="multiply">Multiply (×)</option>
+              <option value="divide">Divide (÷)</option>
+            </select>
+          </label>
 
-        <button id="calculateBtn">Calculate</button>
+          <button id="calculateBtn" type="submit">Calculate</button>
 
-        <div class="result-box">
-          <strong>Result:</strong>
-          <span id="result">--</span>
-        </div>
+          <div class="result-box" aria-live="polite">
+            <strong>Result:</strong>
+            <output id="result" for="num1 num2 operation">--</output>
+          </div>
+        </form>
       </div>
     </section>
-  </div>
+  </main>
 
   <script src="script.js"></script>
 </body>
